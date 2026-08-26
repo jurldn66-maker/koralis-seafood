@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Koralis Seafood</title>
+<style>
+:root{--blue:#075985;--cyan:#0ea5c6;--dark:#062b3b;--bg:#f4fbfd}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#17313d;background:var(--bg)}a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}header{background:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 14px #0001}
+.nav{height:72px;display:flex;justify-content:space-between;align-items:center}.logo{font-weight:900;font-size:24px;color:var(--blue)}.logo span{color:var(--cyan)}nav{display:flex;gap:22px;font-weight:700}nav a:hover{color:var(--cyan)}
+.hero{min-height:570px;display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,#032b3dea,#032b3d66),url('https://images.unsplash.com/photo-1534766438357-2b270b3d2f1b?auto=format&fit=crop&w=1800&q=85') center/cover}
+.hero h1{font-size:clamp(42px,6vw,74px);line-height:1;margin:0 0 18px;max-width:760px}.hero p{font-size:19px;max-width:650px}.btn{display:inline-block;border:0;border-radius:10px;padding:13px 19px;font-weight:800;cursor:pointer}.primary{background:var(--cyan);color:#032b3d}.outline{border:1px solid #fff;color:#fff;margin-left:8px}
+section{padding:65px 0}.heading{text-align:center;margin-bottom:35px}.heading h2{font-size:34px;color:var(--blue)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px #064a6312}.card img{width:100%;height:210px;object-fit:cover}.body{padding:19px}.body h3{color:var(--blue);margin:0 0 8px}.price{font-weight:900;color:var(--cyan);margin-top:10px}
+.features{background:#fff}.features .grid{grid-template-columns:repeat(4,1fr)}.feature{text-align:center;background:var(--bg);padding:22px;border-radius:14px}.feature b{font-size:30px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.about img{width:100%;height:390px;object-fit:cover;border-radius:20px}
+.contact{background:var(--dark);color:#fff}.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:30px}form{background:#fff;color:#17313d;padding:24px;border-radius:16px}input,textarea{width:100%;padding:12px;margin:5px 0 13px;border:1px solid #d5e2e6;border-radius:8px;font:inherit}textarea{min-height:110px}
+footer{background:#031e29;color:#bcd1d9;text-align:center;padding:24px}.wa{position:fixed;right:20px;bottom:20px;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:26px;z-index:20}
+@media(max-width:800px){nav{display:none}.grid,.features .grid,.about,.contactgrid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div class="container nav"><a class="logo" href="#">KORALIS <span>SEAFOOD</span></a><nav><a href="#produkte">Produktet</a><a href="#pse">Pse ne?</a><a href="#rreth">Rreth nesh</a><a href="#kontakt">Kontakt</a><a href="admin.html">Admin</a></nav></div></header>
+<section class="hero"><div class="container"><h1>Freskia e detit në tryezën tuaj.</h1><p>Peshk dhe produkte deti të përzgjedhura për familje, biznese dhe restorante.</p><a class="btn primary" href="#produkte">Shiko produktet</a><a class="btn outline" href="#kontakt">Na kontakto</a></div></section>
+<section id="produkte"><div class="container"><div class="heading"><h2>Produktet tona</h2><p>Produktet dhe çmimet menaxhohen nga paneli Admin.</p></div><div id="products" class="grid"><p>Po ngarkohen produktet...</p></div></div></section>
+<section class="features" id="pse"><div class="container"><div class="heading"><h2>Pse Koralis Seafood?</h2></div><div class="grid">
+<div class="feature"><b>🐟</b><h3>Freski</h3><p>Produkte të përzgjedhura.</p></div>
+<div class="feature"><b>⚖️</b><h3>Me kilogram</h3><p>Sasia që dëshironi.</p></div>
+<div class="feature"><b>🤝</b><h3>Restorante</h3><p>Oferta për bashkëpunim.</p></div>
+<div class="feature"><b>⭐</b><h3>Cilësi</h3><p>Besimi në radhë të parë.</p></div>
+</div></div></section>
+<section id="rreth"><div class="container about"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"><div><h2>Rreth Koralis Seafood</h2><p>Ne sjellim peshk dhe produkte deti me fokus te freskia, cilësia dhe shërbimi korrekt.</p><p>Kontaktoni për porosi ose bashkëpunim me restorante.</p></div></div></section>
+<section class="contact" id="kontakt"><div class="container contactgrid"><div><h2>Na kontaktoni</h2><p>📞 +355 69 000 0000</p><p>✉️ info@koralis-seafood.al</p><p>📍 Adresa e dyqanit</p><p>🕐 Hënë–Shtunë 08:00–20:00</p></div>
+<form onsubmit="sendWA(event)"><h3>Kërkesë e shpejtë</h3><input id="nm" required placeholder="Emri"><input id="ph" required placeholder="Telefoni"><textarea id="ms" required placeholder="Produkt + sasi"></textarea><button class="btn primary" style="width:100%">Dërgo në WhatsApp</button></form></div></section>
+<a class="wa" href="https://wa.me/355690000000">☏</a><footer>© 2026 Koralis Seafood</footer>
+<script>
+const U="https://bbkkrxntizsedqabwaes.supabase.co",K="sb_publishable_gUcWI-iR_QP8TcK27lQV_g_PHFcINMj";
+async function loadProducts(){
+ try{
+  const r=await fetch(U+"/rest/v1/products?select=*&active=eq.true&order=id.desc",{headers:{apikey:K,Authorization:"Bearer "+K}});
+  const d=await r.json();
+  document.getElementById("products").innerHTML=d.map(x=>`<article class="card"><img src="${x.image_url||'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&w=900&q=80'}"><div class="body"><h3>${x.name}</h3><p>${x.description||""}</p><div class="price">${Number(x.price)>0?Number(x.price).toLocaleString("sq-AL")+" Lek / "+x.unit:"Çmimi: Kontaktoni"}</div></div></article>`).join("")||"<p>Nuk ka produkte.</p>";
+ }catch(e){document.getElementById("products").innerHTML="<p>Nuk u ngarkuan produktet.</p>"}
+}
+function sendWA(e){e.preventDefault();window.open("https://wa.me/355690000000?text="+encodeURIComponent("Përshëndetje Koralis Seafood!\nEmri: "+nm.value+"\nTelefoni: "+ph.value+"\nKërkesa: "+ms.value),"_blank")}
+loadProducts();
+</script></body></html>

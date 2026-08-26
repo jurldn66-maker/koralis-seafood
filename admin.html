@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Koralis Admin</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4fbfd;color:#17313d}.wrap{width:min(1100px,92%);margin:auto}.box{background:white;margin:30px auto;padding:25px;border-radius:16px;box-shadow:0 8px 30px #0001}input,textarea,button{width:100%;box-sizing:border-box;padding:11px;margin:5px 0 12px;border:1px solid #d2e0e5;border-radius:8px;font:inherit}button{background:#0ea5c6;color:white;font-weight:800;cursor:pointer;border:0}.danger{background:#dc3545}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.item{border:1px solid #dce7eb;padding:14px;border-radius:12px;margin-bottom:10px}.muted{color:#657b84}@media(max-width:750px){.grid{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<div id="login" class="box"><h1>🔐 Koralis Seafood Admin</h1><p class="muted">Hyr me emailin e administratorit.</p><input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Fjalëkalimi"><button onclick="login()">Hyr</button><p id="msg"></p></div>
+<div id="app" class="box" style="display:none"><h1>Dashboard</h1><button onclick="logout()">Dil</button><hr><div class="grid"><div><h2>➕ Shto produkt</h2>
+<input id="name" placeholder="Emri"><textarea id="desc" placeholder="Përshkrimi"></textarea><input id="price" type="number" step="0.01" placeholder="Çmimi në Lek"><input id="unit" value="kg" placeholder="Njësia"><input id="stock" type="number" step="0.01" placeholder="Stoku"><input id="image" placeholder="URL e fotos"><button onclick="addProduct()">Ruaj produktin</button></div>
+<div><h2>🐟 Produktet</h2><div id="list">Po ngarkohen...</div></div></div></div></div>
+<script>
+const U="https://bbkkrxntizsedqabwaes.supabase.co",K="sb_publishable_gUcWI-iR_QP8TcK27lQV_g_PHFcINMj";let accessToken="";
+function headers(){return {apikey:K,Authorization:"Bearer "+accessToken,"Content-Type":"application/json"}}
+async function login(){
+ const r=await fetch(U+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:K,"Content-Type":"application/json"},body:JSON.stringify({email:document.getElementById("email").value,password:document.getElementById("password").value})});
+ const d=await r.json(); if(d.access_token){accessToken=d.access_token;document.getElementById("login").style.display="none";document.getElementById("app").style.display="block";load();} else document.getElementById("msg").textContent=d.error_description||"Login dështoi";
+}
+async function load(){
+ const r=await fetch(U+"/rest/v1/products?select=*&order=id.desc",{headers:headers()});const d=await r.json();
+ document.getElementById("list").innerHTML=d.map(x=>`<div class="item"><b>${x.name}</b><br>${x.price} Lek/${x.unit} — Stok: ${x.stock}<br><button class="danger" onclick="removeProduct(${x.id})">Fshi</button></div>`).join("")||"<p>Nuk ka produkte.</p>";
+}
+async function addProduct(){
+ const payload={name:document.getElementById("name").value,description:document.getElementById("desc").value,price:Number(document.getElementById("price").value||0),unit:document.getElementById("unit").value||"kg",stock:Number(document.getElementById("stock").value||0),image_url:document.getElementById("image").value||null,active:true};
+ const r=await fetch(U+"/rest/v1/products",{method:"POST",headers:headers(),body:JSON.stringify(payload)}); if(!r.ok){alert("Nuk u ruajt produkti.");return};["name","desc","price","stock","image"].forEach(id=>document.getElementById(id).value="");load();
+}
+async function removeProduct(id){if(!confirm("Ta fshijmë këtë produkt?"))return;await fetch(U+"/rest/v1/products?id=eq."+id,{method:"DELETE",headers:headers()});load()}
+function logout(){accessToken="";location.reload()}
+</script></body></html>
